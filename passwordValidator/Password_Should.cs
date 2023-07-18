@@ -7,11 +7,8 @@
         [InlineData("", false)]
         public void HasMinimalLength(string password, bool expectedValidation)
         {
-            var pass = new Password(password);
-
-            var isValid = pass.Validate(password);
-
-            isValid
+            _ = new Password(password)
+                .IsValid
                 .Should()
                 .Be(expectedValidation);
         }
