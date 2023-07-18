@@ -8,7 +8,7 @@
 
         internal bool Validate(string v)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
