@@ -2,16 +2,18 @@
 {
     public class Validator_Should
     {
-        [Fact]
-        public void MarkAsCorrectAPasswordWithMoreThan6Characters()
+        [Theory]
+        [InlineData("1234567", true)]
+        [InlineData("", false)]
+        public void ValidateLength(string password, bool expectedValidation)
         {
             var validator = new PasswordValidator();
 
-            var isValid = validator.Validate("1234567");
+            var isValid = validator.Validate(password);
 
             isValid
                 .Should()
-                .BeTrue();
+                .Be(expectedValidation);
         }
     }
 }
