@@ -1,8 +1,8 @@
 ﻿namespace passwordValidator
 {
-    internal class PasswordValidator
+    internal class Password
     {
-        public PasswordValidator()
+        public Password()
         {
         }
 
