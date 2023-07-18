@@ -6,9 +6,9 @@
         {
         }
 
-        internal bool Validate(string v)
+        internal bool Validate(string password)
         {
-            return true;
+            return password.Length > 6;
         }
     }
 }
