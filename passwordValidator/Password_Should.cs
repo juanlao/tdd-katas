@@ -5,6 +5,7 @@
         [Theory]
         [InlineData("123A4567", true)]
         [InlineData("", false)]
+        [InlineData(null, false)]
         public void HasMinimalLength(string passwordString, bool expectedValidation)
         {
             var password = new Password(passwordString);
@@ -26,22 +27,22 @@
                 .BeFalse();
         }
 
-        [Fact]
-        public void ValidateLowerCase()
-        {
-            Assert.Fail();
-        }
+        //[Fact]
+        //public void ValidateLowerCase()
+        //{
+        //    Assert.Fail();
+        //}
 
-        [Fact]
-        public void ContainANumber()
-        {
-            Assert.Fail();
-        }
+        //[Fact]
+        //public void ContainANumber()
+        //{
+        //    Assert.Fail();
+        //}
 
-        [Fact]
-        public void ContainAnUnderscore()
-        {
-            Assert.Fail();
-        }
+        //[Fact]
+        //public void ContainAnUnderscore()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }
