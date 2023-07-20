@@ -3,7 +3,7 @@
     public class Password_Should
     {
         [Theory]
-        [InlineData("123456Aa", true)]
+        [InlineData("123456Aa_", true)]
         [InlineData("", false)]
         [InlineData(null, false)]
         public void ValidateMinimalLength(string passwordString, bool expectedValidation)
@@ -16,47 +16,32 @@
         }
 
         [Fact]
-        public void ValidateDoNotContainACapitalLetter()
+        public void ValidateContainACapitalLetter()
         {
-            var passwordStringWithoutCapitalLetter = "password";
-
-            var password = new Password(passwordStringWithoutCapitalLetter);
-
-            password.IsValid
-                .Should()
-                .BeFalse();
+            AssertValidationShouldFail("without_captial_letters_1");
         }
 
         [Fact]
-        public void ValidateLowerCase()
+        public void ValidateContainLowerCase()
         {
-            var passwordStringWithoutLowerLetter = "PASSWORD";
-
-            var password = new Password(passwordStringWithoutLowerLetter);
-
-            password.IsValid
-                .Should()
-                .BeFalse();
+            AssertValidationShouldFail("CAPITAL_LETTERS_1");
         }
 
         [Fact]
-        public void ValidateDoNotContainANumber()
+        public void ValidateContainANumber()
         {
-            var notcontainingANumber = "Password";
-
-            var password = new Password(notcontainingANumber);
-
-            password.IsValid
-                .Should()
-                .BeFalse();
+            AssertValidationShouldFail("Without_Numbers");
         }
 
         [Fact]
         public void ValidateContainAnUnderscore()
         {
-            var notContainUnderscore = "1Password";
+            AssertValidationShouldFail("1Password");
+        }
 
-            var password = new Password(notContainUnderscore);
+        private void AssertValidationShouldFail(string passwordString)
+        {
+            var password = new Password(passwordString);
 
             password.IsValid
                 .Should()
