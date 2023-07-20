@@ -51,10 +51,16 @@
                 .BeFalse();
         }
 
-        //[Fact]
-        //public void ContainAnUnderscore()
-        //{
-        //    Assert.Fail();
-        //}
+        [Fact]
+        public void ValidateContainAnUnderscore()
+        {
+            var notContainUnderscore = "1Password";
+
+            var password = new Password(notContainUnderscore);
+
+            password.IsValid
+                .Should()
+                .BeFalse();
+        }
     }
 }
