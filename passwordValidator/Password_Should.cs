@@ -5,18 +5,25 @@
         [Theory]
         [InlineData("1234567", true)]
         [InlineData("", false)]
-        public void HasMinimalLength(string password, bool expectedValidation)
+        public void HasMinimalLength(string passwordString, bool expectedValidation)
         {
-            _ = new Password(password)
-                .IsValid
+            var password = new Password(passwordString);
+
+            password.IsValid
                 .Should()
                 .Be(expectedValidation);
         }
 
         [Fact]
-        public void ValidateCapitalLetter()
+        public void DoNotContainACapitalLetter()
         {
-            Assert.Fail();
+            var passwordStringWithCapitalLetter = "password";
+
+            var password = new Password(passwordStringWithCapitalLetter);
+
+            password.IsValid
+                .Should()
+                .BeFalse();
         }
 
         [Fact]
