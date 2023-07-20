@@ -3,7 +3,7 @@
     public class Password_Should
     {
         [Theory]
-        [InlineData("1234567", true)]
+        [InlineData("123A4567", true)]
         [InlineData("", false)]
         public void HasMinimalLength(string passwordString, bool expectedValidation)
         {
