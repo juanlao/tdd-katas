@@ -6,7 +6,7 @@
         [InlineData("123456Aa", true)]
         [InlineData("", false)]
         [InlineData(null, false)]
-        public void HasMinimalLength(string passwordString, bool expectedValidation)
+        public void ValidateMinimalLength(string passwordString, bool expectedValidation)
         {
             var password = new Password(passwordString);
 
@@ -16,7 +16,7 @@
         }
 
         [Fact]
-        public void DoNotContainACapitalLetter()
+        public void ValidateDoNotContainACapitalLetter()
         {
             var passwordStringWithoutCapitalLetter = "password";
 
@@ -39,11 +39,17 @@
                 .BeFalse();
         }
 
-        //[Fact]
-        //public void ContainANumber()
-        //{
-        //    Assert.Fail();
-        //}
+        [Fact]
+        public void ValidateDoNotContainANumber()
+        {
+            var notcontainingANumber = "Password";
+
+            var password = new Password(notcontainingANumber);
+
+            password.IsValid
+                .Should()
+                .BeFalse();
+        }
 
         //[Fact]
         //public void ContainAnUnderscore()
