@@ -18,20 +18,26 @@
         [Fact]
         public void DoNotContainACapitalLetter()
         {
-            var passwordStringWithCapitalLetter = "password";
+            var passwordStringWithoutCapitalLetter = "password";
 
-            var password = new Password(passwordStringWithCapitalLetter);
+            var password = new Password(passwordStringWithoutCapitalLetter);
 
             password.IsValid
                 .Should()
                 .BeFalse();
         }
 
-        //[Fact]
-        //public void ValidateLowerCase()
-        //{
-        //    Assert.Fail();
-        //}
+        [Fact]
+        public void ValidateLowerCase()
+        {
+            var passwordStringWithoutLowerLetter = "PASSWORD";
+
+            var password = new Password(passwordStringWithoutLowerLetter);
+
+            password.IsValid
+                .Should()
+                .BeFalse();
+        }
 
         //[Fact]
         //public void ContainANumber()
