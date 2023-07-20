@@ -5,7 +5,7 @@
         internal bool Validate(string password)
         {
             return IsNotNullNeitherWhiteSpace(password)
-                && HasMinimalLenght(password)
+                && HasMinimalLength(password)
                 && ContainsCapitalLetter(password)
                 && ContainsLowerLetter(password)
                 && ContainsANumber(password)
@@ -17,7 +17,7 @@
             return !string.IsNullOrWhiteSpace(password);
         }
 
-        private bool HasMinimalLenght(string password)
+        private bool HasMinimalLength(string password)
         {
             return password.Length > 6;
         }        
@@ -39,7 +39,7 @@
 
         private bool ContainsUnderscore(string password)
         {
-            return password.Any(c => c== '_');
+            return password.Contains("_");
         }
     }
 }
