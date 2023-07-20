@@ -6,12 +6,18 @@
         {
             return !string.IsNullOrWhiteSpace(password)
                 && password.Length > 6
-                && ContainsCapitalLetter(password);
+                && ContainsCapitalLetter(password)
+                && ContainsLowerLetter(password);
         }
 
         private bool ContainsCapitalLetter(string password)
         {
             return password.Any(c => char.IsUpper(c));
+        }
+
+        private bool ContainsLowerLetter(string password)
+        {
+            return password.Any(c => char.IsLower(c));
         }
     }
 }
