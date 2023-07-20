@@ -2,16 +2,18 @@
 {
     internal class Password
     {
-        public Password(string password)
+        public Password(string password) :
+            this(password, new PasswordValidator())
         {
-            IsValid = Validate(password);
+        }
+
+        private Password(
+            string password,
+            PasswordValidator validator)
+        {
+            IsValid = validator.Validate(password);
         }
 
         public bool IsValid { get; internal set; }
-
-        internal bool Validate(string password)
-        {
-            return password.Length > 6;
-        }
     }
 }
