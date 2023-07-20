@@ -4,14 +4,22 @@
     {
         internal bool Validate(string password)
         {
-            return !string.IsNullOrWhiteSpace(password)
-                && password.Length > 6
+            return IsNotNullNeitherWhiteSpace(password)
+                && HasMinimalLenght(password)
                 && ContainsCapitalLetter(password)
                 && ContainsLowerLetter(password)
                 && ContainsANumber(password);
         }
 
-        
+        private static bool HasMinimalLenght(string password)
+        {
+            return password.Length > 6;
+        }
+
+        private bool IsNotNullNeitherWhiteSpace(string password)
+        {
+            return !string.IsNullOrWhiteSpace(password);
+        }
 
         private bool ContainsCapitalLetter(string password)
         {
