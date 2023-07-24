@@ -32,6 +32,20 @@ namespace CSVParser
         }
 
         [Fact]
+        public void RemoveLineWhenTaxInformationIsNotDecimal()
+        {
+            var lineWithIVANotDecimal = "1,02/05/2019,1008,810,ASD,,ACERLaptop,B76430134,";
+            var lineWithIGICNotDecimal = "1,02/05/2019,1008,810,,ASD,ACERLaptop,B76430134,";
+            var lines = new List<string> { lineWithIVANotDecimal, lineWithIGICNotDecimal };
+
+            var parser = new CSVParser(header, lines);
+
+            parser.filteredLines()
+                .Should()
+                .BeEmpty();
+        }
+
+        [Fact]
         public void RemoveLinesWithSameInvoiceNumber()
         {
             Assert.Fail("TODO");
