@@ -2,17 +2,33 @@ namespace CSVParser
 {
     public class CSVParser_Should
     {
+        private string header = @"Num_Factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente";
+
         [Fact]
         public void ParseSameLinesWhenCorrect()
         {
-            var validContent = @"Num_Factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente
-1,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";
+            var validLine = "1,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";
+            var lines = new List<string> { validLine };
 
-            var parser = new CSVParser(validContent);
+            var parser = new CSVParser(header, lines);
 
-            parser.Parse()
+            parser.filteredLines()
+                .First()
                 .Should()
-                .Be(validContent);
+                .Be(validLine);
+        }
+
+        [Fact]
+        public void RemoveLinesWhenIVAAndIGICareNotSet()
+        {
+            var lineWithoutTaxes = "1,02/05/2019,1008,810,,,ACERLaptop,B76430134,";
+            var lines = new List<string> { lineWithoutTaxes };
+
+            var parser = new CSVParser(header, lines);
+
+            parser.filteredLines()
+                .Should()
+                .BeEmpty();
         }
 
         [Fact]
@@ -36,15 +52,17 @@ namespace CSVParser
         [Fact]
         public void NoInvoiceDataCanBeParsed()
         {
-            var validContent = @"Num_Factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente";
+            var parser = new CSVParser(header, null);
 
-            var parser = new CSVParser(validContent);
-
-            parser.Parse()
+            parser.filteredLines()
                 .Should()
-                .Be(validContent);
+                .BeEmpty();
         }
 
+        [Fact]
+        public void WhenThereIsNoHeader()
+        {
+            Assert.Fail("TODO");
+        }
     }
-}
 }
