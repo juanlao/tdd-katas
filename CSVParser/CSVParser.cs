@@ -11,7 +11,7 @@
             this.lines = lines;
         }
 
-        internal List<string> filteredLines()
+        internal List<string> InvoiceLines()
         {
             if (this.lines == null)
             {
@@ -28,28 +28,15 @@
             var filteredLines = new List<string>();
             foreach (var line in lines)
             {
-                if (TaxFieldsAreNotPresent(line))
-                    break;
+                var invoiceLine = new InvoiceLine(line);
 
-                filteredLines.Add(line);
+                if (invoiceLine.IsValid())
+                {
+                    filteredLines.Add(line);
+                }
             }
 
             return filteredLines;
-        }
-
-        private bool TaxFieldsAreNotPresent(string line)
-        {
-            var fields = line.Split(',');
-
-            var iva = fields[4];
-            var igic = fields[5];
-            if (string.IsNullOrWhiteSpace(iva)
-                && string.IsNullOrWhiteSpace(igic))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }
