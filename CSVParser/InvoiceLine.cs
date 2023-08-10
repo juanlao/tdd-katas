@@ -11,9 +11,12 @@
             var igic = fields[5];
 
             Taxes = new Taxes(iva, igic);
+            Number = fields[0];
         }
 
         public Taxes Taxes { get; private set; }
+
+        public string Number { get; private set; }
 
         internal bool IsValid()
         {

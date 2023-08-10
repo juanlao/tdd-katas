@@ -45,18 +45,17 @@ namespace CSVParser
         }
 
         [Fact]
-        public void RemoveLinesWithSameInvoiceNumber()
+        public void LeaveOnlyUnrepeated()
         {
-            var firstLine = "1,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";
-            var secondLineWithSameInvoiceNumber = "1,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";
-
-            var lines = new List<string> { firstLine, secondLineWithSameInvoiceNumber };
+            var repeatedNumber = "1,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";            
+            var unrepeatedNumber = "2,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";            
+            var lines = new List<string> { repeatedNumber, repeatedNumber, unrepeatedNumber };
 
             var parser = new CSVParser(header, lines);
 
             parser.InvoiceLines()               
                 .Should()
-                .BeEmpty();
+                .NotBeEmpty();
         }
 
         //[Fact]

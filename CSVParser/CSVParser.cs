@@ -28,12 +28,10 @@
 
         private List<InvoiceLine> RemoveRepeated(List<InvoiceLine> validLines)
         {
-            if (validLines.Count > 1)
-            {
-                return new List<InvoiceLine>();
-            }
+            var unrepeated = validLines.DistinctBy(c => c.Number)
+                .ToList();
 
-            return validLines;
+            return unrepeated;
         }
 
         private List<InvoiceLine> RemoveInvalidLines(List<InvoiceLine> lines)
