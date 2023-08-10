@@ -58,11 +58,20 @@ namespace CSVParser
                 .NotBeEmpty();
         }
 
-        //[Fact]
-        //public void RemoveLinesWithCIFAndNIFSet()
-        //{
-        //    Assert.Fail("TODO");
-        //}
+        [Fact]
+        public void RemoveLinesWithCIFAndNIFSet()
+        {
+            var line1 = "1,02/05/2019,1008,810,19,,ACERLaptop,CIF,NIF";
+            var line2 = "2,02/05/2019,1008,810,19,,ACERLaptop,B76430134,";
+            var lines = new List<string> { line1, line2 };
+
+            var parser = new CSVParser(header, lines);
+
+            parser.InvoiceLines()
+                
+                .Should()
+                .ContainSingle();
+        }
 
         //[Fact]
         //public void RemoveLinesWhenTaxesAreNotCorrectlyApplied()
