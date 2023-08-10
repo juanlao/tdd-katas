@@ -18,9 +18,21 @@
                 return new List<string>();
             }
 
-            var filteredLines = RemoveInvalidLines(this.lines);
+            var validLines = RemoveInvalidLines(this.lines);
 
-            return filteredLines;
+            validLines = RemoveRepeated(validLines);
+
+            return validLines;
+        }
+
+        private List<string> RemoveRepeated(List<string> validLines)
+        {
+            if (validLines.Count > 1)
+            {
+                return new List<string>();
+            }
+
+            return validLines;
         }
 
         private List<string> RemoveInvalidLines(List<string> lines)
