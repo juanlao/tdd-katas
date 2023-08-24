@@ -73,7 +73,7 @@ namespace CSVParser
         }
 
         [Fact]
-        public void RemoveLinesWhenTaxesAreNotCorrectlyApplied()
+        public void ExcludesLinesWithMissCalculatedNetAmmountForIvaTax()
         {
             var lineWithCorrectNetAmmount = "1,02/05/2019,1008,810,19,,ACERLaptop,CIF,";
             var lines = new List<string> { lineWithCorrectNetAmmount };
