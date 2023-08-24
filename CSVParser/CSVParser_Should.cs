@@ -72,11 +72,18 @@ namespace CSVParser
                 .ContainSingle();
         }
 
-        //[Fact]
-        //public void RemoveLinesWhenTaxesAreNotCorrectlyApplied()
-        //{
-        //    Assert.Fail("TODO");
-        //}
+        [Fact]
+        public void RemoveLinesWhenTaxesAreNotCorrectlyApplied()
+        {
+            var lineWithCorrectNetAmmount = "1,02/05/2019,1008,810,19,,ACERLaptop,CIF,";
+            var lines = new List<string> { lineWithCorrectNetAmmount };
+
+            var parser = new CSVParser(header, lines);
+
+            parser.InvoiceLines()
+                .Should()
+                .BeEmpty();
+        }
 
         //[Fact]
         //public void NoInvoiceDataCanBeParsed()
