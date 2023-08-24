@@ -13,21 +13,31 @@
             
             Taxes = new Taxes(iva, igic);
 
-            cif = fields[7];
-            nif = fields[8];
+            cif = new FiscalIdentity(fields[7]);
+            nif = new FiscalIdentity(fields[8]);
 
             Number = fields[0];
         }
 
         public Taxes Taxes { get; private set; }
 
-        private string cif;
+        private FiscalIdentity cif;
+        private FiscalIdentity nif;
 
         public string Number { get; private set; }
 
         internal bool IsValid()
         {
+            if (CifAndNifAreFilled())
+                return false;
+
             return Taxes.IsValid();
+        }
+
+        private bool CifAndNifAreFilled()
+        {
+            return cif.IsFilled() 
+                && nif.IsFilled();
         }
     }
 }

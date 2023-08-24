@@ -68,7 +68,6 @@ namespace CSVParser
             var parser = new CSVParser(header, lines);
 
             parser.InvoiceLines()
-                
                 .Should()
                 .ContainSingle();
         }
