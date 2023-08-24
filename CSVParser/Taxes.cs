@@ -7,6 +7,8 @@ namespace CSVParser
         private readonly Tax iva;
         private readonly Tax igic;
 
+        public Tax IVA { get => iva; }
+
         public Taxes(string iva, string igic)
         {
             this.iva = new Tax(iva);
@@ -31,6 +33,18 @@ namespace CSVParser
         {
             return iva.Exist || igic.Exist;
         }
+
+        internal string GetNetAmmount(decimal grossAmmount)
+        {
+            var calculatedNetAmmount = string.Empty;
+            if (iva.Exist)
+            {
+                var calculated = grossAmmount * (1 + iva.DecimalValue / 100);
+                calculatedNetAmmount = calculated.ToString();
+            }
+
+            return calculatedNetAmmount;
+        }
     }
 
     internal class Tax
@@ -43,6 +57,7 @@ namespace CSVParser
         }
 
         public bool Exist { get => !string.IsNullOrWhiteSpace(tax);}
+        public decimal DecimalValue { get => decimal.Parse(tax); }
 
         internal bool IsValid()
         {

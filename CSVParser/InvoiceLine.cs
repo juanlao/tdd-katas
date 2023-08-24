@@ -16,6 +16,8 @@
             cif = new FiscalIdentity(fields[7]);
             nif = new FiscalIdentity(fields[8]);
 
+            netAmmount = fields[3];
+            grossAmmount = fields[2];
             Number = fields[0];
         }
 
@@ -23,6 +25,8 @@
 
         private FiscalIdentity cif;
         private FiscalIdentity nif;
+        private string netAmmount;
+        private string grossAmmount;
 
         public string Number { get; private set; }
 
@@ -31,7 +35,18 @@
             if (CifAndNifAreFilled())
                 return false;
 
+            if (!NetAmmountIsCorrect())
+                return false;
+
             return Taxes.IsValid();
+        }
+
+        private bool NetAmmountIsCorrect()
+        {
+            var grossValue = decimal.Parse(grossAmmount);
+            var correctNetAmmount = Taxes.GetNetAmmount(grossValue);
+
+            return correctNetAmmount == netAmmount;
         }
 
         private bool CifAndNifAreFilled()
